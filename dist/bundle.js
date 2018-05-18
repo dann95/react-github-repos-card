@@ -111,24 +111,26 @@
               return React$1.createElement(
                   'div',
                   null,
-                  'Name: ',
-                  this.props.name,
-                  ' ',
-                  React$1.createElement('br', null),
-                  'Bio: ',
-                  this.props.bio,
-                  ' ',
-                  React$1.createElement('br', null),
-                  'Location: ',
-                  this.props.location,
-                  ' ',
-                  React$1.createElement('br', null),
-                  'Photo: ',
                   React$1.createElement('img', { src: this.props.photo }),
-                  ' ',
-                  React$1.createElement('br', null),
-                  'Repos: ',
-                  JSON.stringify(this.props.repos)
+                  React$1.createElement(
+                      'aside',
+                      null,
+                      React$1.createElement(
+                          'h1',
+                          null,
+                          this.props.name
+                      ),
+                      React$1.createElement(
+                          'p',
+                          null,
+                          this.props.location
+                      ),
+                      React$1.createElement(
+                          'p',
+                          null,
+                          this.props.bio
+                      )
+                  )
               );
           }
       }]);
@@ -148,16 +150,36 @@
       }
 
       createClass(Repository, [{
-          key: 'render',
+          key: "render",
           value: function render() {
               return React$1.createElement(
-                  'div',
-                  null,
-                  'Repository...',
-                  React$1.createElement('br', null),
-                  'name: ',
-                  this.props.name,
-                  React$1.createElement('hr', null)
+                  "a",
+                  { href: "#", className: "gmail" },
+                  React$1.createElement(
+                      "div",
+                      { className: "content" },
+                      React$1.createElement(
+                          "h1",
+                          null,
+                          this.props.name
+                      ),
+                      React$1.createElement(
+                          "span",
+                          null,
+                          "stargazers: ",
+                          this.props.stargazers
+                      )
+                  ),
+                  React$1.createElement(
+                      "svg",
+                      { className: "arrow", xmlns: "http://www.w3.org/2000/svg", width: "48", height: "48",
+                          viewBox: "0 0 48 48" },
+                      React$1.createElement(
+                          "g",
+                          { className: "nc-icon-wrapper", fill: "#444444" },
+                          React$1.createElement("path", { d: "M17.17 32.92l9.17-9.17-9.17-9.17L20 11.75l12 12-12 12z" })
+                      )
+                  )
               );
           }
       }]);
@@ -172,13 +194,22 @@
 
           var _this = possibleConstructorReturn(this, (GithubCard.__proto__ || Object.getPrototypeOf(GithubCard)).call(this, props));
 
+          _this.handleButtonClick = function () {
+              _this.setState(function (prev, props) {
+                  return {
+                      showRepos: !prev.showRepos
+                  };
+              });
+          };
+
           _this.state = {
               name: '',
               user: '',
               location: '',
               bio: '',
               photo: '',
-              repos: []
+              repos: [],
+              showRepos: false
           };
 
           _this.fetchUserData(props.user);
@@ -188,7 +219,6 @@
       createClass(GithubCard, [{
           key: 'fetchUserData',
           value: async function fetchUserData(ghuser) {
-
               var _ref = await Promise.all([fetch('https://api.github.com/users/' + ghuser).then(function (response) {
                   return response.json();
               }), fetch('https://api.github.com/users/' + ghuser + '/repos').then(function (response) {
@@ -214,17 +244,61 @@
           value: function render() {
               return React$1.createElement(
                   'div',
-                  null,
+                  { className: 'contact-area' },
                   React$1.createElement(
-                      'h1',
-                      null,
-                      'GithubCard'
-                  ),
-                  React$1.createElement(User, { name: this.state.name, bio: this.state.bio, photo: this.state.photo, user: this.state.user, location: this.state.location }),
-                  React$1.createElement('hr', null),
-                  this.state.repos.map(function (i) {
-                      return React$1.createElement(Repository, { name: i.name });
-                  })
+                      'div',
+                      { className: 'contact' },
+                      React$1.createElement(
+                          'main',
+                          null,
+                          React$1.createElement(
+                              'section',
+                              null,
+                              React$1.createElement(
+                                  'div',
+                                  { className: 'content' },
+                                  React$1.createElement(User, { name: this.state.name, photo: this.state.photo, bio: this.state.bio, location: this.state.location }),
+                                  React$1.createElement(
+                                      'button',
+                                      { onClick: this.handleButtonClick, className: this.state.showRepos ? 'active' : '' },
+                                      React$1.createElement(
+                                          'span',
+                                          null,
+                                          'Repositories'
+                                      ),
+                                      React$1.createElement(
+                                          'svg',
+                                          { xmlns: 'http://www.w3.org/2000/svg', width: '48', height: '48',
+                                              viewBox: '0 0 48 48' },
+                                          React$1.createElement(
+                                              'g',
+                                              { className: 'nc-icon-wrapper', fill: '#444444' },
+                                              React$1.createElement('path', { d: 'M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z' })
+                                          )
+                                      )
+                                  )
+                              ),
+                              React$1.createElement(
+                                  'div',
+                                  { className: 'title' + (this.state.showRepos ? ' active' : '') },
+                                  React$1.createElement(
+                                      'p',
+                                      null,
+                                      'Repositories'
+                                  )
+                              )
+                          )
+                      ),
+                      React$1.createElement(
+                          'nav',
+                          { className: this.state.showRepos ? 'active' : '' },
+                          this.state.repos.sort(function (a, b) {
+                              return b.stargazers_count - a.stargazers_count;
+                          }).map(function (i, _i) {
+                              return React$1.createElement(Repository, { name: i.name, stargazers: i.stargazers_count, key: _i });
+                          })
+                      )
+                  )
               );
           }
       }]);

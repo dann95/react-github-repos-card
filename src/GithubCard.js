@@ -13,10 +13,19 @@ class GithubCard extends React.Component{
             location: '',
             bio: '',
             photo: '',
-            repos: []
+            repos: [],
+            showRepos: false
         }
 
         this.fetchUserData(props.user)
+    }
+
+    handleButtonClick = () => {
+        this.setState((prev, props) => {
+            return {
+                showRepos: ! prev.showRepos
+            }
+        })
     }
 
     async fetchUserData(ghuser) {
@@ -40,11 +49,34 @@ class GithubCard extends React.Component{
 
     render() {
         return (
-            <div>
-                <h1>GithubCard</h1>
-                <User name={this.state.name} bio={this.state.bio} photo={this.state.photo} user={this.state.user} location={this.state.location} />
-                <hr />
-                {this.state.repos.map((i => <Repository name={i.name} />))}
+            <div className="contact-area">
+                <div className="contact">
+                    <main>
+                        <section>
+                            <div className="content">
+                                <User name={this.state.name} photo={this.state.photo} bio={this.state.bio} location={this.state.location}/>
+                                    <button onClick={this.handleButtonClick} className={this.state.showRepos ? 'active' : ''}>
+                                        <span>Repositories</span>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                             viewBox="0 0 48 48">
+                                            <g className="nc-icon-wrapper" fill="#444444">
+                                                <path d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
+                                            </g>
+                                        </svg>
+                                    </button>
+                            </div>
+
+                            <div className={'title' + (this.state.showRepos ? ' active' : '')}><p>Repositories</p></div>
+                        </section>
+
+
+                    </main>
+
+                    <nav className={this.state.showRepos ? 'active' : ''}>
+                        {this.state.repos.sort((a,b) => b.stargazers_count - a.stargazers_count).map((i, _i) => <Repository name={i.name} stargazers={i.stargazers_count} key={_i}/>)}
+                    </nav>
+                </div>
             </div>
         )
     }

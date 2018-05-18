@@ -1,6 +1,7 @@
 import React from 'react';
 
 class User extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {}
@@ -9,11 +10,12 @@ class User extends React.Component {
     render() {
         return (
             <div>
-                Name: {this.props.name} <br/>
-                Bio: {this.props.bio} <br />
-                Location: {this.props.location} <br />
-                Photo: <img src={this.props.photo}/> <br />
-                Repos: {JSON.stringify(this.props.repos)}
+                <img src={this.props.photo} />
+                <aside>
+                    <h1>{this.props.name}</h1>
+                    <p>{this.props.location}</p>
+                    <p>{this.props.bio}</p>
+                </aside>
             </div>
         )
     }

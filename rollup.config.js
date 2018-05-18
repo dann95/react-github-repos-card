@@ -1,6 +1,8 @@
 import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import postcss from 'rollup-plugin-postcss';
+import cssnano from 'cssnano';
 
 const input = './index.js'
 
@@ -8,6 +10,12 @@ export default {
     input,
     external: ['react', 'react-dom'],
     plugins: [
+        postcss({
+            plugins: [
+                // cssnano()
+            ],
+            extensions: [ '.css' ],
+        }),
         babel({
             plugins: ['transform-class-properties']
         }),
