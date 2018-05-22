@@ -9,12 +9,11 @@ class Repository extends React.Component {
 
     render() {
         return (
-            <a href="#" className="gmail">
+            <a href={this.props.url} target={'_blank'}>
                 <div className="content">
                     <h1>{this.props.name}</h1>
                     <span>stargazers: {this.props.stargazers}</span>
                 </div>
-
                 <svg className="arrow" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                      viewBox="0 0 48 48">
                     <g className="nc-icon-wrapper" fill="#444444">

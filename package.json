@@ -1,14 +1,16 @@
 {
   "name": "github-repos-react",
   "version": "0.0.1",
-  "description": "",
+  "description": "Card for show github respositories from user",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
   },
-  "author": "",
+  "author": "Daniel Rubin",
   "license": "ISC",
   "dependencies": {
+    "mergify": "^1.0.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },
@@ -19,7 +21,6 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-react": "^6.24.1",
-    "cssnano": "^3.10.0",
     "rollup": "^0.59.1",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.3",
