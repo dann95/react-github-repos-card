@@ -37,3 +37,6 @@
     }
 }
 ```
+
+## Credits
+The html/css was taken from a codepen (i am noob at html & css) , you can see it here: https://codepen.io/BeanBaag/pen/dzyGpM

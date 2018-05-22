@@ -80,22 +80,20 @@ class GithubCard extends React.Component{
                                     icons={this.props.container.icons}
                                     text={this.props.container.text}
                                 />
-                                    <button onClick={this.handleButtonClick} className={this.state.showRepos ? 'active' : ''} style={{backgroundColor: this.props.button.color, color: this.props.button.textColor}}>
-                                        <span>{this.props.button.text}</span>
+                                <button onClick={this.handleButtonClick} className={this.state.showRepos ? 'active' : ''} style={{backgroundColor: this.props.button.color, color: this.props.button.textColor}}>
+                                    <span>{this.props.button.text}</span>
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                                             viewBox="0 0 48 48">
-                                            <g className="nc-icon-wrapper" fill="#444444">
-                                                <path style={{fill: this.props.button.textColor}} d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
-                                            </g>
-                                        </svg>
-                                    </button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                         viewBox="0 0 48 48">
+                                        <g className="nc-icon-wrapper" fill="#444444">
+                                            <path style={{fill: this.props.button.textColor}} d="M14.83 30.83L24 21.66l9.17 9.17L36 28 24 16 12 28z"></path>
+                                        </g>
+                                    </svg>
+                                </button>
                             </div>
 
                             <div className={'title' + (this.state.showRepos ? ' active' : '')} style={{backgroundColor: this.props.container.strip}}><p>{this.props.button.text}</p></div>
                         </section>
-
-
                     </main>
 
                     <nav className={this.state.showRepos ? 'active' : ''}>
